@@ -17,9 +17,9 @@ public class LinkController {
     public LinkDTO addNewLink(@RequestBody CreateLinkDTO link){
         return service.createNewLink(link);
     }
-    @PostMapping("/link/redirect")
-    public ModelAndView redirect(@RequestBody RedirectDTO redirect){
-        String url = (service.redirect(redirect.getId(), redirect.getPassword()).getUrl());
+    @GetMapping("/redirect/{linkId}/{password}")
+    public ModelAndView redirect(@PathVariable String linkId, @PathVariable String password){
+        String url = service.redirect(linkId, password).getUrl();
         return new ModelAndView("redirect:"+url);
     }
     @GetMapping("/metrics/{linkId}")
